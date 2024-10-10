@@ -1,33 +1,48 @@
+/*B) Получить биты из целого числа длиной 𝑙𝑒𝑛 битов, находящиеся
+между первыми 𝑖 битами и последними 𝑖 битами. Пример. Пусть
+есть 12-ти разрядное целое число, представленное в двоичной
+системе счисления 100011101101. Получим биты находящиеся
+между первыми 3 и последними 3 битами: 011101. */
+
 #include <stdio.h>
 #include <string.h>
 
+// Удаление крайних цифр числа
+int removeExtremeDigits(int num, int i) {
 
-int main() {
-    int i, len, num;
-    printf("Enter length of the number: ");
-    scanf("%d", &len);
+    char strNum[16];
+    sprintf(strNum, "%d", num); //Число => строка
+    
+    int len = strlen(strNum);
 
-    char strokeNum[len + 1];
-
-    printf("\nEnter number: ");
-    scanf("%d", &num);
-    printf("\nEnter the number of extreme bits: ");
-    scanf("%d", &i);
-
-    char strokeSum[len - 2 * i + 1];
-
-    sprintf(strokeNum, "%d", num); //Перевод числа в строку
-
-    if (i > len) {
-        printf("The number of extreme characters is greater than the length of the string!"); // Если количество символов i больше длины строки
+    if (2 * i >= len) {
+        printf("The number of extreme digits is too large\n");
         return 1;
     }
 
-    strncpy(strokeSum, strokeNum + i, len - 2 * i); //Запись необходимой частки строки в переменную strokeSum
-    
-    strokeSum[2 * i] = '\0'; //Завершающий ноль в последнем индексе
+    // Строка для оставшихся цифр
+    char resultStr[16];
+    strncpy(resultStr, strNum + i, len - 2 * i); 
+    resultStr[len - 2 * i] = '\0';
 
-    printf("The result is: %s", strokeSum);
+    int result;
+    sscanf(resultStr, "%d", &result); //Строка => число
+
+    return result;
+}
+
+int main() {
+    int num, i, result;
+    
+    printf("Enter number: ");
+    scanf("%d", &num);
+
+    printf("\nEnter the number of extreme digits to be removed: ");
+    scanf("%d", &i);
+
+    result = removeExtremeDigits(num, i);
+
+    printf("The result after removing extreme digits is: %d\n", result);
 
     return 0;
 }
