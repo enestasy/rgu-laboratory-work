@@ -1,4 +1,7 @@
+//Дано 2 𝑝 разрядное целое число. «Поксорить» все биты этого числа друг с другом. Пример. 101110001 → 1; 11100111 → 0.
+
 #include <stdio.h>
+#include <string.h>
 
 int xorForNumber(int num) { // Побитовая операция xor
     int theCurrentBit, i;
@@ -45,7 +48,7 @@ int main() {
     char binaryStroke[33];
 
     printf("Enter binary number: ");
-    scanf("%32s", &binaryStroke); //Считываение строки с двоичным числом
+    scanf("%32s", binaryStroke); //Считываение строки с двоичным числом
     number = fromStroketoNum(binaryStroke);
     printf("Result of the xoring is: %d\n", xorForNumber(number));
     return 0;
