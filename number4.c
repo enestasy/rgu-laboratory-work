@@ -49,4 +49,6 @@ int main() {
     minimum = findMin(numbers, arrayValue);
     
     printf ("Minimum number in array is: %d\n", minimum);
+
+    return 0;
 }
